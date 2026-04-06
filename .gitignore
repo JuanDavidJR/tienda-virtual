@@ -1,0 +1,16 @@
+# Backend
+tienda-backend/venv/
+tienda-backend/__pycache__/
+tienda-backend/**/__pycache__/
+tienda-backend/*.db
+tienda-backend/.env
+
+# Frontend
+tienda-frontend/node_modules/
+tienda-frontend/dist/
+tienda-frontend/.env
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.pyc
