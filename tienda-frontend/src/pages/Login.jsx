@@ -16,10 +16,9 @@ export default function Login() {
     try {
       const { data } = await login(form)
       if (data.requiere_2fa) {
-        // Redirige a verificación 2FA (puedes implementarlo después)
-        toast.error('Este usuario tiene 2FA activo — funcionalidad próximamente')
+        navigate('/verify-2fa', { state: { email: form.email } })
         return
-      }
+    }
       loginUser(data.access_token)
       toast.success('¡Bienvenido!')
       navigate('/catalog')
