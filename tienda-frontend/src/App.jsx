@@ -11,6 +11,7 @@ import Orders from './pages/Orders'
 import Tickets from './pages/Tickets'
 import Profile from './pages/Profile'
 import Admin from './pages/Admin'
+import Verify2FA from './pages/Verify2FA'
 
 function PrivateRoute({ children }) {
   const { token } = useAuth()
@@ -39,6 +40,8 @@ export default function App() {
         <Route path="/tickets" element={<PrivateRoute><Tickets /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
+        <Route path="/verify-2fa" element={<Verify2FA />} />
+
       </Routes>
     </div>
   )
