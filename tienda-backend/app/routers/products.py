@@ -34,7 +34,7 @@ async def get_products(
 async def get_product(product_id: int, db: AsyncSession = Depends(get_db)):
     return await ProductService(db).get_product(product_id)
 
-@router.put("/{product_id}", response_model=ProductResponse)
+@router.patch("/{product_id}", response_model=ProductResponse)
 async def update_product(product_id: int, data: ProductUpdate, db: AsyncSession = Depends(get_db)):
     return await ProductService(db).update_product(product_id, data)
 
