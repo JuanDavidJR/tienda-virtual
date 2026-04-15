@@ -3,7 +3,7 @@ import { useAuth } from '../../context/AuthContext'
 import { ShoppingCart, Package, Ticket, User, LogOut, Store, Settings } from 'lucide-react'
 
 export default function Navbar() {
-  const { token, logout } = useAuth()
+  const { token, logout, isAdmin } = useAuth()
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -37,9 +37,11 @@ export default function Navbar() {
               <Link to="/tickets" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1">
                 <Ticket size={18} /> Soporte
               </Link>
-              <Link to="/admin" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1">
-  <Settings size={18} /> Admin
-</Link>
+              {isAdmin && (
+  <Link to="/admin" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1">
+    <Settings size={18} /> Admin
+  </Link>
+)}
 
             </>
           )}
