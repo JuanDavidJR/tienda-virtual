@@ -15,11 +15,11 @@ def verify_password(plain: str, hashed: str) -> bool:
     """Compara contraseña ingresada con la encriptada en DB."""
     return pwd_context.verify(plain, hashed)
 
-def create_access_token(user_id: int) -> str:
-    """Crea el token JWT que el frontend guarda y envía en cada request."""
+def create_access_token(user_id: int, is_admin: bool = False) -> str:
     payload = {
         "sub": str(user_id),
         "type": "access",
+        "is_admin": is_admin,
         "exp": datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     }
     return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
