@@ -56,7 +56,7 @@ class AuthService:
         if user.totp_enabled:
             return {"requiere_2fa": True, "email": user.email}
 
-        token = create_access_token(user.id)
+        token = create_access_token(user.id, user.is_admin)
         return {"access_token": token, "token_type": "bearer"}
 
     async def setup_totp(self, user: User) -> dict:
@@ -92,5 +92,5 @@ class AuthService:
         if not verify_totp(user.totp_secret, data.code):
             raise HTTPException(status_code=401, detail="Código incorrecto")
 
-        token = create_access_token(user.id)
+        token = create_access_token(user.id, user.is_admin)
         return {"access_token": token, "token_type": "bearer"}
