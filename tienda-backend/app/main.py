@@ -9,7 +9,10 @@ app = FastAPI(title=settings.APP_NAME)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # URL de Vite
+    allow_origins=[
+        "http://localhost:5173",
+        "https://tienda-frontend-bacs.onrender.com",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
