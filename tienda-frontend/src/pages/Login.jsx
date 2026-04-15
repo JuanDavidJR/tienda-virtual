@@ -10,24 +10,24 @@ export default function Login() {
   const { loginUser } = useAuth()
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    try {
-      const { data } = await login(form)
-      if (data.requiere_2fa) {
-        navigate('/verify-2fa', { state: { email: form.email } })
-        return
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  setLoading(true)
+  try {
+    const { data } = await login(form)
+    if (data.requiere_2fa) {
+      navigate('/verify-2fa', { state: { email: form.email } })
+      return
     }
-      loginUser(data.access_token)
-      toast.success('¡Bienvenido!')
-      navigate('/catalog')
-    } catch (err) {
-      toast.error(err.response?.data?.detail || 'Error al iniciar sesión')
-    } finally {
-      setLoading(false)
-    }
+    loginUser(data.access_token)
+    toast.success('¡Bienvenido!')
+    navigate('/catalog')
+  } catch (err) {
+    toast.error(err.response?.data?.detail || 'Error al iniciar sesión')
+  } finally {
+    setLoading(false)
   }
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
