@@ -5,13 +5,14 @@ const AuthContext = createContext(null)
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('token'))
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     if (token) {
-      // Decodifica el token para obtener datos básicos del usuario
       try {
         const payload = JSON.parse(atob(token.split('.')[1]))
         setUser({ id: payload.sub })
+        setIsAdmin(payload.is_admin || false)
       } catch {
         logout()
       }
@@ -27,10 +28,11 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('token')
     setToken(null)
     setUser(null)
+    setIsAdmin(false)
   }
 
   return (
-    <AuthContext.Provider value={{ user, token, loginUser, logout }}>
+    <AuthContext.Provider value={{ user, token, isAdmin, loginUser, logout }}>
       {children}
     </AuthContext.Provider>
   )
