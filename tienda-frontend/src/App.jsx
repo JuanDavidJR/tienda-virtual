@@ -12,7 +12,11 @@ import Tickets from './pages/Tickets'
 import Profile from './pages/Profile'
 import Admin from './pages/Admin'
 
-// Ruta protegida — redirige al login si no hay sesión
+function PrivateRoute({ children }) {
+  const { token } = useAuth()
+  return token ? children : <Navigate to="/login" />
+}
+
 function AdminRoute({ children }) {
   const { token, isAdmin } = useAuth()
   if (!token) return <Navigate to="/login" />
@@ -35,7 +39,6 @@ export default function App() {
         <Route path="/tickets" element={<PrivateRoute><Tickets /></PrivateRoute>} />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
-
       </Routes>
     </div>
   )
