@@ -1,10 +1,9 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://tienda-backend-fyps.onrender.com',
 })
 
-// Agrega el token JWT automáticamente en cada request
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -13,7 +12,6 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Si el token expira, redirige al login
 api.interceptors.response.use(
   (response) => response,
   (error) => {
