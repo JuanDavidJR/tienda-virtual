@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
-import { getCategories } from '../services/products'
+import { getCategories, updateProduct, deleteProduct  } from '../services/products'
 import api from '../services/api'
 import toast from 'react-hot-toast'
 import { Plus, Package, Tag } from 'lucide-react'
@@ -11,6 +11,9 @@ export default function Admin() {
   const navigate = useNavigate()
   const [categories, setCategories] = useState([])
   const [tab, setTab] = useState('producto')
+  const [products, setProducts] = useState([])
+const [editingProduct, setEditingProduct] = useState(null)
+const [editForm, setEditForm] = useState({})
 
   const [productForm, setProductForm] = useState({
     name: '', description: '', price: '', stock: '', image_url: '', category_id: ''
